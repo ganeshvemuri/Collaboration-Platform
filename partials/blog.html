@@ -1,0 +1,169 @@
+<!-- <div>
+<form>
+BlogName<input type="text" name="blogname" ng-model="blog_Name"><br>
+Blog Description<input type="text" name="blog Description" ng-model="blog_Description"><br>
+<button ng-click="blog()">Submit</button>
+</form>
+
+
+</div> -->
+<html>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<body>
+<div>
+    <hr>
+    <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal">Add New Blog</button>
+    <h2>Blogs</h2>
+    <span class="clearfix"></span>
+    </hr>
+    <hr>
+    </hr>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="blog in blogs">
+      <td>{{blog.blog_Id}}</td>
+        <td>{{blog.blog_Name}}</td>
+        <td>{{blog.blog_Description}}</td>
+        <td><button type="button" class="btn btn-primary btn-sm "  data-toggle="modal" data-target="#editblog" ng-click="editBlog(blog)">Edit</button></td>
+         <td><button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#deleteblog" ng-click="editBlog(blog)">Delete</button></td>
+      </tr>
+       </tbody>
+</table>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add New Blog</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal">
+
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="blog_Name">Title:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="blog_Name" placeholder="Enter Title" ng-model="blog_Name">
+    </div>
+  </div>
+  
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="blog_Description">Description:</label>
+    <div class="col-sm-10"> 
+      <textarea class="form-control" id="blog_Description" placeholder="Enter Description" ng-model="blog_Description"></textarea>
+    </div>
+  </div>
+  
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary btn-lg" ng-click="blog()" data-dismiss="modal">Post</button>
+    </div>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="editblog" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Blog</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal">
+         <div class="form-group">
+    <label class="control-label col-sm-2" for="blog_Id">Blog_Id</label>
+    <div class="col-sm-10"> 
+      <input type="text" class="form-control" id="blog_Id" ng-model="blogDataToEdit.blog_Id">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="title">Name:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" ng-model="blogDataToEdit.blog_Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="description">Description:</label>
+    <div class="col-sm-10"> 
+      <textarea class="form-control" id="description" ng-model="blogDataToEdit.blog_Description"></textarea>
+    </div>
+  </div>
+  
+  
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary btn-lg" ng-click="saveEdit()" data-dismiss="modal">Save Edit</button>
+    </div>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="deleteblog" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Delete Blog</h4>
+        </div>
+        <div class="modal-body">
+         <strong >You are about to delete {{blogDataToEdit.blog_Id}} the blog Are you sure?</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="deleteBlog(blogDataToEdit)">Yes</button>
+           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    </body>
+  </html>

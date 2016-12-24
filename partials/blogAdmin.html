@@ -1,0 +1,129 @@
+<html>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<body>
+
+<div>
+    <hr>
+   
+    <h2>AllBlogs</h2>
+    <span class="clearfix"></span>
+    </hr>
+    <hr>
+    </hr>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+      <th>BlogId</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>postedby</th>
+                  
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="adminblog in blogs">
+      <td>{{adminblog.blog_Id}}</td>
+        <td>{{adminblog.blog_Name}}</td>
+        <td>{{adminblog.blog_Description}}</td>
+        <td>{{adminblog.postedby}}</td>
+        <td><button type="button" class="btn btn-primary btn-sm " data-toggle="modal"  data-target="#approve" ng-click="AppDisapp(adminblog)">Approve</button></td>
+         <td><button type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#disapprove" ng-click="AppDisapp(adminblog)">Disapprove</button></td>
+      </tr>
+       </tbody>
+  </table>
+ 
+ <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add New Blog</h4>
+        </div>
+        <div class="modal-body">
+         <form class="form-horizontal">
+
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="blog_Name">Title:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="blog_Name" placeholder="Enter Title" ng-model="blog_Name">
+    </div>
+  </div>
+  
+
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="blog_Description">Description:</label>
+    <div class="col-sm-10"> 
+      <textarea class="form-control" id="blog_Description" placeholder="Enter Description" ng-model="blog_Description"></textarea>
+    </div>
+  </div>
+  
+
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary btn-lg" ng-click="blog()" data-dismiss="modal">Post</button>
+    </div>
+  </div>
+</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="approve" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Approve</h4>
+        </div>
+        <div class="modal-body">
+         <strong >Do you want to approve {{blogstatus.adminblog_Id}} the blog Are you sure?</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="approveBlog(adminblog)">Approve</button>
+           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    </div>
+<!-- Modal -->
+  <div class="modal fade" id="disapprove" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Disapprove</h4>
+        </div>
+        <div class="modal-body">
+        Do you want to disapprove {{blogstatus.adminBlog_Id}} blog?
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn-btn-default" data-dismiss="modal" ng-click="disapproveBlog(adminblog)">Yes</button>
+        <button type="button" class="btn-btn-default" data-dismiss="modal">No</button>
+        </div></div></div>
+        </body>
+        </html>
